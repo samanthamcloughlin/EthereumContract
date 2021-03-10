@@ -17,10 +17,4 @@ contract AdvTopicsContract {
         name = _name;
     }
 
-    //
-
 }
-
-// Resources for solidity programming and debugging
-// https://www.bitdegree.org/learn/solidity-examples
-//
