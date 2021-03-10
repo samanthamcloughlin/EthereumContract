@@ -5,7 +5,7 @@ contract AdvTopicsContract {
 
     // Declare state variables of the contract
     address public owner;
-    mapping (address => uint) public cupcakeBalances;
+    mapping (address => uint) public someWalletAddress;
     string public name;
 
     constructor () {
@@ -17,4 +17,9 @@ contract AdvTopicsContract {
         name = _name;
     }
 
+    // Gets the public string name
+    // We add keyword 'view' as this doesn't change any state
+    function getName () public view returns (string memory){
+        return name;
+    }
 }

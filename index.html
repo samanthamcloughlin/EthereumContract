@@ -66,14 +66,11 @@
   <script src="js/bootstrap.min.js"></script>
   <!-- https://raw.githubusercontent.com/ChainSafe/web3.js/v1.3.4/dist/web3.min.js -->
   <script src="js/web3.min.js"></script>
+  <script src="js/contracts/globals.js"></script>
   <script src="js/contracts/all.js"></script>
   <script>
     // THIS NEEDS to match your Ganache localhost
     let web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
-    // set provider for all later instances to use
-    web3.eth.Contract.setProvider('ws://localhost:8545');
-
-    // Most of this I ripped from https://docs.metamask.io/guide/ethereum-provider.html
 
 
     async function startApp() {
@@ -87,6 +84,7 @@
         console.log(e.message)
       }
 
+      // Should probably restart app when provider changes!
       const provider = await detectEthereumProvider();
       if (provider) {
         console.log("Provider: ", provider);
@@ -144,6 +142,7 @@
           console.log('Please connect to MetaMask.');
         } else if (accounts[0] !== currentAccount) {
           currentAccount = accounts[0];
+          ACTIVE_WALLET = currentAccount;
           // Do any other work!
         }
       }
@@ -180,19 +179,21 @@
           });
       }
 
+
       document.getElementById('interactionTest').onclick = talkWithContract;
 
-
-      function talkWithContract() {
+      async function talkWithContract() {
         // Eth Contract takes the ABI
-        //let myContractAbi = new web3.eth.Contract(AdvTopicsContractABI);
-        //let myContract = myContractAbi.at(AdvTopicsAddress);
-        console.log(AdvTopicsContractABI, AdvTopicsAddress);
-        MY_CONTRACT = new web3.eth.Contract(AdvTopicsContractABI, AdvTopicsAddress);
-        MY_CONTRACT.methods.setName("Stephen Hawking");
+        ACTIVE_CONTRACT = new web3.eth.Contract(AdvTopicsContractABI, AdvTopicsAddress);
+        var settingName = await ACTIVE_CONTRACT.methods.setName("Stephen Hawking").send({
+          from: ACTIVE_WALLET
+        });
+        var name = await ACTIVE_CONTRACT.methods.getName().call();
+
+        // Validate the name is changing
+        console.log(settingName, name);
       }
     }
-    var MY_CONTRACT;
 
     startApp();
 

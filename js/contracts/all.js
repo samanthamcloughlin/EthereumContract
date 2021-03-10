@@ -1,27 +1,34 @@
 // Grab the contract application binaray interface from
 // http://remix.ethereum.org/#optimize=false&runs=200&evmVersion=null&version=soljson-v0.7.4+commit.3f05b770.js
 // Go to Solidity Compiler -> Compile -> Compilation Details -> Contract ABI
-var AdvTopicsAddress = "0xCd0289ae9B30CF566EBB45CB6a353f78761fd3A1";
+var AdvTopicsAddress = "0x71DeDeA117Fa2a2E47F81186b3500cD9796613Ff";
 var AdvTopicsContractABI = [
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			}
+		],
+		"name": "setName",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "cupcakeBalances",
+		"inputs": [],
+		"name": "getName",
 		"outputs": [
 			{
-				"internalType": "uint256",
+				"internalType": "string",
 				"name": "",
-				"type": "uint256"
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
@@ -56,14 +63,20 @@ var AdvTopicsContractABI = [
 	{
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
+				"internalType": "address",
+				"name": "",
+				"type": "address"
 			}
 		],
-		"name": "setName",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"name": "someWalletAddress",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	}
 ];
